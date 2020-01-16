@@ -1,37 +1,58 @@
 import('http://localhost:3030/html2canvas.js');
 
-export const addTextToBody = (text) => {
-  const div = document.createElement('div');
-  div.textContent = text;
-  document.body.appendChild(div);
-};
-
-export const report = (text) => {
+export const info = (text) => {
   alert(text);
-  request();
 };
 
-export const request = () => {
-  html2canvas(document.body).then(function(canvas) {
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', 'http://localhost:3030/testRailClient', true);
-    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    xhr.onreadystatechange = () => {
-      if (xhr.readyState == 4 && xhr.status == 200) {
-        var response = xhr.responseText;
-        var obj = JSON.parse(response);
-        console.log(obj);
-      }
-    }
-
-    // Export the canvas to its data URI representation
-    var base64url = canvas.toDataURL('image/jpeg'); //.replace('image/jpeg', 'image/octet-stream');
-
-    var data = JSON.stringify({
-      capture: base64url,
-      test: 'SIDE1',
-      run_id: 1
-    });
-    xhr.send(data);
+export const fireMouseEvent = (element, eventType, clientX, clientY) => {
+  const mouseEvent = new MouseEvent(eventType, {
+    view: window,
+    bubbles: !0,
+    cancelable: !0,
+    clientX,
+    clientY
   });
+  element.dispatchEvent(mouseEvent);
 };
+
+export const clickAtPosition = (element, clientX, clientY) => {
+  fireMouseEvent(element, "mousedown", clientX, clientY);
+  fireMouseEvent(element, "mouseup", clientX, clientY);
+};
+
+export const report = (runId, testRefs, reportData = { status_id: 1 }, captureSelector = '') => {
+  if(!captureSelector) {
+    localRequest(runId, testRefs, reportData);
+  } else {
+    let captureNode;
+    if(captureSelector == 'body') {
+      captureNode = document.body;
+    } else {
+      captureNode = document.querySelector(captureSelector);
+    }
+    html2canvas(captureNode).then(function(canvas) {
+      const dataUri = canvas.toDataURL('image/jpeg');
+      localRequest(runId, testRefs, reportData, dataUri);
+    });
+  }
+
+};
+
+const localRequest = (runId, testRefs, reportData = { status_id: 1 }, dataUri = '') => {
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', 'http://localhost:3030/testRailClient', true);
+  xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  xhr.onreadystatechange = () => {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      const response = JSON.parse(xhr.responseText);
+      console.log(response);
+    }
+  };
+  const requestData = JSON.stringify({
+    runId,
+    testRefs,
+    reportData,
+    dataUri
+  });
+  xhr.send(requestData);
+}

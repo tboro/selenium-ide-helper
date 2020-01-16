@@ -15,8 +15,8 @@ const imageDataUri = require('image-data-uri');
 
 const app = express();
 app.use(cors());
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
 app.get('/', (req, res) => {
   const markdown = require('markdown-js');
@@ -37,15 +37,15 @@ app.get('/html2canvas.js', (req, res) => {
 
 app.post('/testRailClient', (req, res) => {
   res.type('json');
-  testRailClient.getTests(req.body.run_id).then(tests => {
+  testRailClient.getTests(req.body.runId).then(tests => {
     for (index in tests) {
       let testData = tests[index];
-      if (testData.refs == req.body.test) {
-        testRailClient.addResult(testData.id, {"status_id": 1, "comment": "login page loaded"}).then(resultData => {
+      if (testData.refs == req.body.testRefs) {
+        testRailClient.addResult(testData.id, req.body.reportData).then(resultData => {
           console.log('added result id ' + resultData.id + ' for test run: ' + testData.id);
-          if (req.body.capture) {
-            const dataUri = req.body.capture;
-            imageDataUri.outputFile(dataUri, 'tmp.jpg').then(imgPath => {
+          if (req.body.dataUri) {
+            const timestamp = new Date() / 1000 | 0;
+            imageDataUri.outputFile(req.body.dataUri, req.body.testRefs + '_' + timestamp + '.jpg').then(imgPath => {
               testRailClient.addAttachmentToResult(resultData.id, imgPath).then(attachmentData => {
                 console.log('added attachment ' + imgPath + ' to result id ' + resultData.id);
                 res.json(attachmentData);
