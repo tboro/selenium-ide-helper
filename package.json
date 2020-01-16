@@ -1,0 +1,24 @@
+{
+  "name": "selenium-ide-helper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "tboro",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "html2canvas": "^1.0.0-rc.5",
+    "image-data-uri": "^2.0.1",
+    "markdown-js": "0.0.4",
+    "testrail": "github:dlenroc/node-testrail-api"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0"
+  }
+}
