@@ -28,4 +28,4 @@ configs in `.env` file
     ```
     import('http://localhost:3030/testUtils.js').then((utils) => { window.sih = utils; });
     ```
-4. exports from the `public/testUtils.js` can be used in next `execute script` commands in your test suite
+4. exports from the `public/testUtils.js` can be used in next `execute script` commands in your test
