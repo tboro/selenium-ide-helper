@@ -28,7 +28,7 @@
       "id": "b4c33f65-26da-406b-910a-700de503ff14",
       "comment": "",
       "command": "executeScript",
-      "target": "import('http://localhost:3030/testUtils.js').then((utils) => { window.m = utils; });",
+      "target": "import('http://localhost:3030/testUtils.js').then((utils) => { window.sih = utils; });",
       "targets": [],
       "value": ""
     }, {
@@ -42,14 +42,14 @@
       "id": "817e9bc5-243d-4598-8d9c-ecdc990e9aa1",
       "comment": "",
       "command": "executeScript",
-      "target": "m.report('the helper is loaded!');",
+      "target": "sih.info('the helper is loaded!');",
       "targets": [],
       "value": ""
     }, {
       "id": "172bebf3-3615-4b22-a3f6-7f78d5eddb2f",
       "comment": "",
       "command": "executeScript",
-      "target": "alert('finish');",
+      "target": "sih.info('finish');",
       "targets": [],
       "value": ""
     }]
