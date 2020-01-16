@@ -1,0 +1,67 @@
+{
+  "id": "a20d2615-5dc0-47ba-a5bf-a1785cbf59e4",
+  "version": "2.0",
+  "name": "test",
+  "url": "https://google.com/",
+  "tests": [{
+    "id": "daa933bd-e55e-4299-af22-c64a2846b2a8",
+    "name": "",
+    "commands": []
+  }, {
+    "id": "e1340f85-5ccf-4d75-b678-f718aed87d0a",
+    "name": "test 1",
+    "commands": [{
+      "id": "efc2fdc2-b689-44ff-8f4f-2c4ff06e37e1",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "313f1f84-9a2b-4522-b3c2-f08b8fd8543d",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1440x804",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b4c33f65-26da-406b-910a-700de503ff14",
+      "comment": "",
+      "command": "executeScript",
+      "target": "import('http://localhost:3030/testUtils.js').then((utils) => { window.m = utils; });",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "ce80b8ff-23ae-4d40-b65a-d4b88476692d",
+      "comment": "loading...",
+      "command": "pause",
+      "target": "2000",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "817e9bc5-243d-4598-8d9c-ecdc990e9aa1",
+      "comment": "",
+      "command": "executeScript",
+      "target": "m.report('the helper is loaded!');",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "172bebf3-3615-4b22-a3f6-7f78d5eddb2f",
+      "comment": "",
+      "command": "executeScript",
+      "target": "alert('finish');",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "60c07ca4-94fe-4a53-9b20-67963449fd7b",
+    "name": "",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["daa933bd-e55e-4299-af22-c64a2846b2a8"]
+  }],
+  "urls": ["https://google.com/", "http://localhost/"],
+  "plugins": []
+}
