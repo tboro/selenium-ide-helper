@@ -48,6 +48,7 @@ app.post('/testRailClient', (req, res) => {
             imageDataUri.outputFile(req.body.dataUri, req.body.testRefs + '_' + timestamp + '.jpg').then(imgPath => {
               testRailClient.addAttachmentToResult(resultData.id, imgPath).then(attachmentData => {
                 console.log('added attachment ' + imgPath + ' to result id ' + resultData.id);
+                fs.unlink(imgPath , err => { if (err) console.log(err) });
                 res.json(attachmentData);
               });
             });
