@@ -25,6 +25,13 @@
       "targets": [],
       "value": ""
     }, {
+      "id": "70cf43ed-32ab-4946-96df-6d528030ed31",
+      "comment": "",
+      "command": "executeScript",
+      "target": "window.RUN_ID=1",
+      "targets": [],
+      "value": ""
+    }, {
       "id": "b4c33f65-26da-406b-910a-700de503ff14",
       "comment": "",
       "command": "executeScript",
@@ -43,6 +50,13 @@
       "comment": "",
       "command": "executeScript",
       "target": "sih.info('the helper is loaded!');",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "fc7ce90d-de95-4dbc-a630-a4cc26d59038",
+      "comment": "",
+      "command": "executeScript",
+      "target": "sih.report(RUN_ID, 'SIDE1', { status_id: 1, comment: 'page loaded' }, 'body');",
       "targets": [],
       "value": ""
     }, {
