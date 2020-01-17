@@ -4,6 +4,11 @@ export const info = (text) => {
   alert(text);
 };
 
+export const toElement = (selector) => {
+  return document.querySelector(selector)
+};
+export { toElement as te };
+
 export const fireMouseEvent = (element, eventType, clientX, clientY) => {
   const mouseEvent = new MouseEvent(eventType, {
     view: window,
@@ -14,11 +19,13 @@ export const fireMouseEvent = (element, eventType, clientX, clientY) => {
   });
   element.dispatchEvent(mouseEvent);
 };
+export { fireMouseEvent as fme };
 
 export const clickAtPosition = (element, clientX, clientY) => {
   fireMouseEvent(element, "mousedown", clientX, clientY);
   fireMouseEvent(element, "mouseup", clientX, clientY);
 };
+export { clickAtPosition as cap };
 
 export const report = (runId, testRefs, reportData = { status_id: 1 }, captureSelector = '') => {
   if(!captureSelector) {
@@ -35,8 +42,8 @@ export const report = (runId, testRefs, reportData = { status_id: 1 }, captureSe
       localRequest(runId, testRefs, reportData, dataUri);
     });
   }
-
 };
+export { report as r };
 
 const localRequest = (runId, testRefs, reportData = { status_id: 1 }, dataUri = '') => {
   const xhr = new XMLHttpRequest();
@@ -55,4 +62,4 @@ const localRequest = (runId, testRefs, reportData = { status_id: 1 }, dataUri = 
     dataUri
   });
   xhr.send(requestData);
-}
+};

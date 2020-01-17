@@ -28,10 +28,12 @@ app.get('/', (req, res) => {
 });
 
 app.get('/testUtils.js', (req, res) => {
+  //res.setHeader("Set-Cookie", "HttpOnly;Secure;SameSite=None");
   res.sendFile('./public/testUtils.js', {root: __dirname});
 });
 
 app.get('/html2canvas.js', (req, res) => {
+  //res.setHeader("Set-Cookie", "HttpOnly;Secure;SameSite=None");
   res.sendFile('./node_modules/html2canvas/dist/html2canvas.min.js', {root: __dirname});
 });
 
