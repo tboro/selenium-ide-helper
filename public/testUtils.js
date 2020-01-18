@@ -31,13 +31,10 @@ export const report = (runId, testRefs, reportData = { status_id: 1 }, captureSe
   if(!captureSelector) {
     localRequest(runId, testRefs, reportData);
   } else {
-    let captureNode;
-    if(captureSelector == 'body') {
-      captureNode = document.body;
-    } else {
-      captureNode = document.querySelector(captureSelector);
-    }
-    html2canvas(captureNode).then(function(canvas) {
+    const captureNode = toElement(captureSelector);
+    html2canvas(captureNode, {
+      useCORS: true
+    }).then(canvas => {
       const dataUri = canvas.toDataURL('image/jpeg');
       localRequest(runId, testRefs, reportData, dataUri);
     });
