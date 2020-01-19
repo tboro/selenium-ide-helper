@@ -2,12 +2,8 @@
   "id": "a20d2615-5dc0-47ba-a5bf-a1785cbf59e4",
   "version": "2.0",
   "name": "test",
-  "url": "https://google.com/",
+  "url": "https://maps.google.com/",
   "tests": [{
-    "id": "daa933bd-e55e-4299-af22-c64a2846b2a8",
-    "name": "",
-    "commands": []
-  }, {
     "id": "e1340f85-5ccf-4d75-b678-f718aed87d0a",
     "name": "test 1",
     "commands": [{
@@ -76,6 +72,6 @@
     "timeout": 300,
     "tests": ["daa933bd-e55e-4299-af22-c64a2846b2a8"]
   }],
-  "urls": ["https://google.com/", "http://localhost/"],
+  "urls": ["https://google.com/", "http://localhost/", "https://maps.google.com/"],
   "plugins": []
 }
