@@ -55,13 +55,6 @@
       "target": "sih.report(RUN_ID, 'SIDE1', { status_id: 1, comment: 'page loaded' }, 'body');",
       "targets": [],
       "value": ""
-    }, {
-      "id": "172bebf3-3615-4b22-a3f6-7f78d5eddb2f",
-      "comment": "",
-      "command": "executeScript",
-      "target": "sih.info('finish');",
-      "targets": [],
-      "value": ""
     }]
   }],
   "suites": [{

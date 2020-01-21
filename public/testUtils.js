@@ -50,6 +50,9 @@ const localRequest = (runId, testRefs, reportData = { status_id: 1 }, dataUri = 
     if (xhr.readyState == 4 && xhr.status == 200) {
       const response = JSON.parse(xhr.responseText);
       console.log(response);
+      if(response.error) {
+        info(response.error);
+      }
     }
   };
   const requestData = JSON.stringify({

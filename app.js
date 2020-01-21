@@ -40,9 +40,12 @@ app.get('/html2canvas.js', (req, res) => {
 app.post('/testRailClient', (req, res) => {
   res.type('json');
   testRailClient.getTests(req.body.runId).then(tests => {
+    var foundTests = 0;
+    var responseSet = false;
     for (index in tests) {
-      let testData = tests[index];
+      var testData = tests[index];
       if (testData.refs == req.body.testRefs) {
+        foundTests++;
         testRailClient.addResult(testData.id, req.body.reportData).then(resultData => {
           console.log('added result id ' + resultData.id + ' for test run: ' + testData.id);
           if (req.body.dataUri) {
@@ -50,16 +53,24 @@ app.post('/testRailClient', (req, res) => {
             imageDataUri.outputFile(req.body.dataUri, req.body.testRefs + '_' + timestamp + '.jpg').then(imgPath => {
               testRailClient.addAttachmentToResult(resultData.id, imgPath).then(attachmentData => {
                 console.log('added attachment ' + imgPath + ' to result id ' + resultData.id);
-                fs.unlink(imgPath , err => { if (err) console.log(err) });
-                res.json(attachmentData);
+                fs.unlink(imgPath , err => { if(err) console.log(err); });
               });
             });
-          } else {
-            res.json(resultData);
           }
+          responseSet || res.json({ success: true });
+          responseSet = true;
+        }).catch(error => {
+          console.log(error);
+          responseSet || res.json({ error: error });
+          responseSet = true;
         });
       }
     }
+    if(foundTests === 0) {
+      res.json({ error: 'Cannot find the test with reference ' + req.body.testRefs + ' in the test run ' + req.body.runId + '. Please verify tests settings in Test Rail.' });
+    }
+  }).catch(error => {
+    res.json({ error: 'Cannot access TestRail API. Please verify if ".env" file is set correctly and the test run "' + req.body.runId + '" exists. ' + error });
   });
 });
 
