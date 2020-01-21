@@ -4,8 +4,13 @@ export const info = (text) => {
   alert(text);
 };
 
-export const toElement = (selector) => {
-  return document.querySelector(selector)
+export const toElement = (selector, silent = false) => {
+  const element = document.querySelector(selector)
+  if(!silent && !element) {
+    info('Cannot find any elements by selector: ' + selector);
+  }
+  
+  return element;
 };
 export { toElement as te };
 
