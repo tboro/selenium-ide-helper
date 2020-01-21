@@ -50,7 +50,7 @@ app.post('/testRailClient', (req, res) => {
           console.log('added result id ' + resultData.id + ' for test run: ' + testData.id);
           if (req.body.dataUri) {
             const timestamp = new Date() / 1000 | 0;
-            imageDataUri.outputFile(req.body.dataUri, req.body.testRefs + '_' + timestamp + '.jpg').then(imgPath => {
+            imageDataUri.outputFile(req.body.dataUri, req.body.runId + '_' + req.body.testRefs + '_' + resultData.id + '_' + timestamp + '.jpg').then(imgPath => {
               testRailClient.addAttachmentToResult(resultData.id, imgPath).then(attachmentData => {
                 console.log('added attachment ' + imgPath + ' to result id ' + resultData.id);
                 fs.unlink(imgPath , err => { if(err) console.log(err); });
